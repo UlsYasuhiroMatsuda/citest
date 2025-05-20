@@ -1,0 +1,20 @@
+name: Pull_Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+    steps:
+      - name: Extract Pull Request Info 
+        id: extract_pull_request_info
+        run: |
+          # Get Info
+          echo pull id is ${{ github.event.pull_request.number }}
+          echo "PR_NUM=${{ github.event.pull_request.number }}" >> GITHUB_ENV
+          echo pull request is ${{ github.event.pull_request.title }}
